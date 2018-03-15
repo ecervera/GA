@@ -1,5 +1,7 @@
 FROM jupyter/scipy-notebook:82b978b3ceeb
 
+RUN pip install --no-cache-dir notebook pyevolve
+
 ENV NB_USER jovyan
 ENV NB_UID 1000
 ENV HOME /home/${NB_USER}
