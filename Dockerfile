@@ -1,6 +1,12 @@
-FROM jupyter/scipy-notebook:82b978b3ceeb
+FROM ros:indigo-ros-base
 
-RUN pip install --no-cache-dir notebook pyevolve
+# install pip
+RUN apt-get update && apt-get install -y \
+    python-pip \
+    && rm -rf /var/lib/apt/lists/
+
+RUN pip install --upgrade pip
+RUN pip install jupyter matplotlib pyevolve pillow
 
 ENV NB_USER jovyan
 ENV NB_UID 1000
@@ -10,9 +16,10 @@ RUN adduser --disabled-password \
     --gecos "Default user" \
     --uid ${NB_UID} \
     ${NB_USER}
-    
+
 # Make sure the contents of our repo are in ${HOME}
 COPY . ${HOME}
 USER root
 RUN chown -R ${NB_UID} ${HOME}
 USER ${NB_USER}
+WORKDIR ${HOME}
