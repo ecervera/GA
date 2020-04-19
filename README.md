@@ -10,7 +10,7 @@
 Run in a terminal:
 
     git clone https://github.com/ecervera/GA.git
-    cd perceptrons
+    cd GA
     docker build --rm -t ga .
     docker run -it --rm --volume="$(pwd):/home/jovyan/work:rw" \ 
       -p 8888:8888 ga start.sh jupyter lab --NotebookApp.token=''
